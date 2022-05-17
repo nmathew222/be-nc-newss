@@ -1,5 +1,6 @@
 const{
-    fetchTopics
+    fetchTopics,
+    
 }= require("../model/model.js")
 
 exports.getTopics= (req,res,next)=>{
@@ -11,3 +12,5 @@ exports.getTopics= (req,res,next)=>{
         console.log(err)
     })
 }
+
+
