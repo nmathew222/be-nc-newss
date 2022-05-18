@@ -135,3 +135,28 @@ test('status:404, responds with an error message when passed a id that does not 
                             })
 
 });
+describe("getAPI/users", ()=>{
+    test("200: an array of user objects with the property username", () =>{
+    return request(app)
+    .get("/api/users")
+    .expect(200)
+    .then(({body})=>{
+        console.log(body.users);
+        body.users.forEach((user) => {expect(user).toEqual({username: expect.any(String),name: expect.any(String),avatar_url: expect.any(String)});
+    });
+        expect(Array.isArray(body.users)).toBe(true);
+       expect(body.users.length).toBe(4)
+        
+
+    })
+})
+test('status:404, responds with an error message when passed a invalid get pathway' ,() => {
+    return request(app)
+        .get("/guyyfggygbgygbygyuggyg g g")
+        .expect(404)
+        .then((res)=>{
+           
+            expect(res.body.msg).toBe("not found")
+        })
+})
+})
