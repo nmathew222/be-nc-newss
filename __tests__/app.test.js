@@ -75,4 +75,46 @@ test('status:404, responds with an error message when passed a id that does not 
                 expect(res.body.msg).toBe("bad request")
             })
         })
+        describe('patch /api/articles/:article_id' ,() => {
+            test('status:200, updated object is returned', () => {   
+                ;
+                return request(app)
+                    .patch(`/api/articles/1`)
+                    .send({inc_votes: 1})
+                    .expect(200)
+                    .then(({body})=>{
+                        expect(body.updatedVotes).toEqual({
+                               article_id: 1,
+                               title:'Living in the shadow of a great man',
+                               topic:'mitch',
+                               author: 'butter_bridge',
+                                body:'I find this existence challenging',
+                                created_at: "2020-07-09T20:11:00.000Z",
+                                 votes: 101
+            
+                                
+            
+                        })
+                    })
+            
+                })
+            })
+            test('status:404, responds with an error message when passed a id that does not exist but is valid' ,() => {
+                return request(app)
+                    .patch("/api/articles/20000000")
+                    .expect(404)
+                    .then((res)=>{
+                        expect(res.body.msg).toBe("not found")
+                    })
+                })
+                test('status:400, responds with an error message when passed a invalid id type' ,() => {
+                    return request(app)
+                        .patch("/api/articles/snowwww")
+                        .expect(400)
+                        .then((res)=>{
+                            expect(res.body.msg).toBe("bad request")
+                        })
+                    })
+            
+
 });
