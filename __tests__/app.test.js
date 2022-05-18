@@ -115,6 +115,23 @@ test('status:404, responds with an error message when passed a id that does not 
                             expect(res.body.msg).toBe("bad request")
                         })
                     })
-            
+                    test('status:400, responds with an error message when passed a empty body' ,() => {
+                        return request(app)
+                            .patch("/api/articles/1")
+                            .send({inc_votes: {}})
+                            .expect(400)
+                            .then((res)=>{
+                                expect(res.body.msg).toBe("bad request")
+                            })
+                        })
+                        test('status:400, responds with an error message when passed a incorrect body type' ,() => {
+                            return request(app)
+                                .patch("/api/articles/snowwww")
+                                .send({inc_votes: "word"})
+                                .expect(400)
+                                .then((res)=>{
+                                    expect(res.body.msg).toBe("bad request")
+                                })
+                            })
 
 });

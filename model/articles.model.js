@@ -9,7 +9,7 @@ exports.fetchArticlesById= (article_id)=>{
     })
 }
 exports.patchVotes= (article_id,votes)=>{
-    console.log(votes)
+    
     return db.query("UPDATE articles SET votes=votes+$1 WHERE article_id=$2 RETURNING *",
         [votes, article_id]
         )
