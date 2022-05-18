@@ -152,7 +152,7 @@ describe("getAPI/users", ()=>{
 })
 test('status:404, responds with an error message when passed a invalid get pathway' ,() => {
     return request(app)
-        .get("/guyyfggygbgygbygyuggyg g g")
+        .get("/api/nousershere")
         .expect(404)
         .then((res)=>{
            
