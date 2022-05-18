@@ -4,14 +4,17 @@ const {
     
 } = require("./controller/controller.js")
 const {
-    getArticlesById
+    getArticlesById,
+    updateVotes
 }= require("./controller/articles.controller")
 
 const app= express();
+app.use(express.json())
 
 
 app.get("/api/topics", getTopics)
 app.get("/api/articles/:article_id", getArticlesById)
+app.patch("/api/articles/:article_id", updateVotes)
 
 app.use('/*',(req,res,next)=>{
     res.status(404).send({msg: "not found"});
