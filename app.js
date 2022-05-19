@@ -5,7 +5,8 @@ const {
 } = require("./controller/controller.js")
 const {
     getArticlesById,
-    updateVotes
+    updateVotes,
+    getAllArticles
 }= require("./controller/articles.controller");
 const { getUsers } = require("./controller/users.controller.js");
 
@@ -16,16 +17,16 @@ app.use(express.json())
 
 app.get("/api/topics", getTopics)
 app.get("/api/articles/:article_id", getArticlesById)
+app.get("/api/articles", getAllArticles)
 app.patch("/api/articles/:article_id", updateVotes)
 app.get("/api/users", getUsers)
-
 
 
 app.use('/*',(req,res,next)=>{
     res.status(404).send({msg: "not found"});
 });
 app.use((err, req, res, next) => {
-    
+    console.log(err);
     if (err.code === "22P02") {
       res.status(400).send({ msg: "bad request" });
     } else {
