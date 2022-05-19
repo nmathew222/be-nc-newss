@@ -183,3 +183,20 @@ describe('GET /api/articles/:article_id and comment count' ,() => {
     
         })
     })
+
+
+    describe('GET /api/articles and comment count' ,() => {
+        test('status:200, responds with all articles and all its properties and the comment count and articles sorted out by date in descending order', () => {   
+            return request(app)
+                .get(`/api/articles`)
+                .expect(200)
+                .then(({body})=>{
+                    body.articles.forEach((article) => {expect(article).toEqual({article_id: expect.any(Number),title: expect.any(String),topic: expect.any(String),author: expect.any(String),created_at: expect.any(String),votes: expect.any(Number),comment_count: expect.any(Number),});
+    });
+    expect(body.articles).toBeSorted("created_at", {descending:true});
+
+                    
+                })
+        
+            })
+        })
