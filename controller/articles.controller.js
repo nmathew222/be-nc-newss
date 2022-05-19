@@ -1,6 +1,7 @@
 const {
     fetchArticlesById,
-    patchVotes
+    patchVotes,
+    
 }= require("../model/articles.model")
 
 exports.getArticlesById= (req,res,next)=>{
@@ -13,6 +14,10 @@ exports.getArticlesById= (req,res,next)=>{
 
     })
 }
+
+
+
+
 exports.updateVotes= (req,res, next) =>{
     
     const {article_id}= req.params;
@@ -24,3 +29,7 @@ exports.updateVotes= (req,res, next) =>{
         next(err)
     })
 }
+
+
+
+
