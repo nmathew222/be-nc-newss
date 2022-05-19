@@ -43,7 +43,7 @@ test('status:200, responds with a single matching article', () => {
         .get(`/api/articles/${article_id}`)
         .expect(200)
         .then(({body})=>{
-            expect(body.article).toEqual({
+            expect(body.article).toMatchObject({
                    article_id: 1,
                    title:'Living in the shadow of a great man',
                    topic:'mitch',
@@ -141,7 +141,7 @@ describe("getAPI/users", ()=>{
     .get("/api/users")
     .expect(200)
     .then(({body})=>{
-        console.log(body.users);
+        
         body.users.forEach((user) => {expect(user).toEqual({username: expect.any(String),name: expect.any(String),avatar_url: expect.any(String)});
     });
         expect(Array.isArray(body.users)).toBe(true);
@@ -160,3 +160,26 @@ test('status:404, responds with an error message when passed a invalid get pathw
         })
 })
 })
+describe('GET /api/articles/:article_id and comment count' ,() => {
+    test('status:200, responds with a single matching article and all its properties and the comment count', () => {   
+        return request(app)
+            .get(`/api/articles/1`)
+            .expect(200)
+            .then(({body})=>{
+                expect(body.article).toMatchObject({
+                       article_id: 1,
+                       title:'Living in the shadow of a great man',
+                       topic:'mitch',
+                       author: 'butter_bridge',
+                        body:'I find this existence challenging',
+                        created_at: "2020-07-09T20:11:00.000Z",
+                         votes: 100,
+                         comment_count: 11
+    
+                        
+    
+                })
+            })
+    
+        })
+    })

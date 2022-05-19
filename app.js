@@ -20,6 +20,7 @@ app.patch("/api/articles/:article_id", updateVotes)
 app.get("/api/users", getUsers)
 
 
+
 app.use('/*',(req,res,next)=>{
     res.status(404).send({msg: "not found"});
 });
