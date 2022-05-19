@@ -186,7 +186,7 @@ describe('GET /api/articles/:article_id and comment count' ,() => {
 
 
     describe('GET /api/articles and comment count' ,() => {
-        test.only('status:200, responds with all articles and all its properties and the comment count and articles sorted out by date in descending order', () => {   
+        test('status:200, responds with all articles and all its properties and the comment count and articles sorted out by date in descending order', () => {   
             return request(app)
                 .get(`/api/articles`)
                 .expect(200)
