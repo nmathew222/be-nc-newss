@@ -200,3 +200,37 @@ describe('GET /api/articles/:article_id and comment count' ,() => {
         
             })
         })
+        describe('GET /api/articles/:article_id/comments' ,() => {
+            test('status:200, responds with all the comments that match the article_id', () => {   
+                const article_id=1;
+                return request(app)
+                    .get(`/api/articles/${article_id}/comments`)
+                    .expect(200)
+                    .then(({body})=>{
+                        console.log(body.comments, "hsb");
+                        body.comments.forEach((comment) => {expect(comment).toEqual({comment_id: expect.any(Number),author: expect.any(String),created_at: expect.any(String), votes: expect.any(Number),body: expect.any(String),article_id: expect.any(Number) });
+    });
+   
+                                
+            
+                        })
+                    })
+                    test('status:404, responds with an error message when passed a id that does not exist but is valid' ,() => {
+                        return request(app)
+                            .get("/api/articles/20000000/comments")
+                            .expect(404)
+                            .then((res)=>{
+                                expect(res.body.msg).toBe("not found")
+                            })
+                        })
+                        test('status:400, responds with an error message when passed a invalid id type' ,() => {
+                            return request(app)
+                                .get("/api/articles/snowwww/comments")
+                                .expect(400)
+                                .then((res)=>{
+                                    expect(res.body.msg).toBe("bad request")
+                                })
+                            })    
+
+                })
+                    
