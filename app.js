@@ -9,6 +9,7 @@ const {
     getAllArticles
 }= require("./controller/articles.controller");
 const { getUsers } = require("./controller/users.controller.js");
+const {getComments}= require("./controller/comments.controller")
 
 
 const app= express();
@@ -20,7 +21,7 @@ app.get("/api/articles/:article_id", getArticlesById)
 app.get("/api/articles", getAllArticles)
 app.patch("/api/articles/:article_id", updateVotes)
 app.get("/api/users", getUsers)
-
+app.get("/api/articles/:article_id/comments", getComments)
 
 app.use('/*',(req,res,next)=>{
     res.status(404).send({msg: "not found"});
