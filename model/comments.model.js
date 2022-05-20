@@ -7,19 +7,17 @@ exports.fetchComments = (article_id) => {
       article_id,
     ])
     .then((results) => {
-      
       if (results.rows.length === 0) {
         return fetchArticlesById(article_id);
-      }else{
-      return results.rows;
+      } else {
+        return results.rows;
       }
     })
-    .then((results) => { 
-        if(Array.isArray(results)){
-
-      return results;
-        } else{
-            return []
-        }
+    .then((results) => {
+      if (Array.isArray(results)) {
+        return results;
+      } else {
+        return [];
+      }
     });
 };
