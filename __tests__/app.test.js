@@ -207,11 +207,9 @@ describe('GET /api/articles/:article_id and comment count' ,() => {
                     .get(`/api/articles/${article_id}/comments`)
                     .expect(200)
                     .then(({body})=>{
-                        console.log(body.comments, "hsb");
                         body.comments.forEach((comment) => {expect(comment).toEqual({comment_id: expect.any(Number),author: expect.any(String),created_at: expect.any(String), votes: expect.any(Number),body: expect.any(String),article_id: expect.any(Number) });
     });
-   
-                                
+                    expect(body.comments.length).toBe(11)                    
             
                         })
                     })
@@ -230,7 +228,16 @@ describe('GET /api/articles/:article_id and comment count' ,() => {
                                 .then((res)=>{
                                     expect(res.body.msg).toBe("bad request")
                                 })
-                            })    
+                            }) 
+                            test("review exists but however there's not comments" ,() => {
+                                return request(app)
+                                    .get("/api/articles/4/comments")
+                                    .expect(200)
+                                    .then((res)=>{
+                                        expect(res.body.comments).toEqual([])
+                                    })
+                                }) 
+                               
 
                 })
                     
