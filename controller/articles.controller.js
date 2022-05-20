@@ -43,3 +43,8 @@ exports.getAllArticles= (req,res,next)=>{
     })
 }
 
+exports.postPark = (req,res) => {
+    //console.log(req.body, "req.body cl");
+    insertPark(req.body).then((park)=>{
+     // console.log(park, "consolelog park");
+      res.status(201).send({park})
