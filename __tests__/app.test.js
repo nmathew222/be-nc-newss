@@ -260,7 +260,6 @@ describe("3. POST /api/articles/:article_id/comments", () => {
         .send(newComments)
         .expect(400)
         .then(({ body }) => {
-          console.log(body);
           expect(body.msg).toBe("bad request");
         });
     });
