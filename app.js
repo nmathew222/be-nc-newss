@@ -1,5 +1,5 @@
 const express = require("express");
-const cors = require('cors');
+const cors = require("cors");
 
 const { getTopics } = require("./controller/controller.js");
 const {
@@ -10,8 +10,8 @@ const {
 } = require("./controller/articles.controller");
 const { getUsers } = require("./controller/users.controller.js");
 const { getComments } = require("./controller/comments.controller");
-app.use(cors());
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 app.get("/api/topics", getTopics);
@@ -26,8 +26,7 @@ app.use("/*", (req, res, next) => {
   res.status(404).send({ msg: "not found" });
 });
 app.use((err, req, res, next) => {
-  if (err.code === "22P02" || err.code === "23502" || err.code === "23503") 
-  {
+  if (err.code === "22P02" || err.code === "23502" || err.code === "23503") {
     res.status(400).send({ msg: "bad request" });
   } else {
     next(err);
