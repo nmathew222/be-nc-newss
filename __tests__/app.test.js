@@ -294,3 +294,19 @@ describe("3. POST /api/articles/:article_id/comments", () => {
         });
     });
 });
+
+describe.only("delete comment /api/comments/:comment_id", ()=>{
+  test("status 204, responds with an empty response body", ()=>{
+    return request(app).delete("/api/comments/1").expect(204)
+  })
+  test("404, when deleting something that doesn't exist", ()=>{
+    return request(app)
+    .delete("/api/comments/2383829")
+  })
+  test("400, when deleting something that has invalid id", ()=>{
+    return request(app)
+    .delete("/api/comments/jdkjd")
+  })
+
+  
+})
